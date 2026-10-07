@@ -79,8 +79,8 @@ A project posts one message per thing worth saying:
 ## Senders
 
 - **Engram — episode alerts for followed shows.** Ready, stuck and overdue,
-  for recently aired episodes only; the gaps the overdue check has to close
-  first are in Engram's `docs/working-notes/integration-ideas.md`.
+  for recently aired episodes only. Scoped as an arc in Engram's
+  `docs/working-notes/episode-alerts.md`.
 - **vyoh.gg — wishlist price drops.** Not written up there yet. The price data
   it would read from is scoped in vyoh.gg's
   `docs/working-notes/steam/steam-library-economics.md`.
