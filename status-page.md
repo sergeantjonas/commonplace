@@ -1,6 +1,7 @@
 # Status page
 
-**Status:** Idea — nothing built, nothing committed to. Four hostnames to watch.
+**Status:** Idea, committed to — nothing built yet. It will be built in its own
+repo, `status.vyoh.gg`, with the prober on the box first.
 
 `status.vyoh.gg`: one page that says whether each public site on the shared box
 answers, plus an alert when one stops. It watches every tenant and belongs to
@@ -48,20 +49,21 @@ are read-only and reveal only the status.
   running with an unreachable database counts as down. Engram's is `/ready`,
   which answers 503 in that case. vyoh.gg's is `/health`.
 - **Each state is a word as well as a colour:** up, late, down.
-
-## Open
-
-- **Where the prober runs.** On the box, it could be a systemd timer that
-  reuses the backup heartbeat pattern from the `shared-vps` skill: the key in an
-  env file, sent over stdin, and a script that always exits 0. That needs no new
+- **The prober runs on the box**, as a systemd timer that reuses the backup
+  heartbeat pattern from the `shared-vps` skill: the key in an env file, sent
+  over stdin, and a script that always exits 0. That needs no new
   infrastructure, and a dead box still alerts through silence. Its blind spot is
   the network between the box and everyone else. The box holds its public
   addresses on `eth0`, so a request to its own hostname never leaves the box,
-  and the netcup firewall and upstream routing go untested. Off the box, a
-  scheduled GitHub Actions workflow or a Cloudflare Worker cron trigger tests
-  the path visitors take, at the cost of a second thing to keep running.
-  GitHub's scheduled runs are delayed and sometimes dropped under load, so their
-  grace has to be wide enough that a late runner is not read as an outage.
+  and the netcup firewall and upstream routing go untested.
+
+## Open
+
+- **A second prober off the box**, if that blind spot ever matters. A scheduled
+  GitHub Actions workflow or a Cloudflare Worker cron trigger tests the path
+  visitors take, at the cost of a second thing to keep running. GitHub's
+  scheduled runs are delayed and sometimes dropped under load, so their grace
+  has to be wide enough that a late runner is not read as an outage.
 - **Build or adopt.** Uptime Kuma and Gatus host themselves, so watching this
   box would take a second machine. UptimeRobot and Better Stack probe from
   outside and host a page, both with free tiers. Upptime runs on Actions and
