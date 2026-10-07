@@ -69,7 +69,8 @@ A project posts one message per thing worth saying:
   Discord. A small service with one Postgres table is the likelier shape.
 - **Where it runs.** Its own tenant on the shared box, or a route inside an
   existing app. A route inside Engram would tie vyoh.gg's alerts to Engram's
-  uptime.
+  uptime. On the box, it cannot carry the alert that the box is down;
+  [status-page.md](status-page.md) sends that one another way.
 - **How senders authenticate.** One secret per source, so a leaked Engram
   secret cannot post as vyoh.gg.
 - **When the hub is down.** A scheduled check re-sends on its next run and the

@@ -33,3 +33,5 @@ Every note opens with a `**Status:**` line; trust it over this list.
 - `notify-hub.md` — idea. One place that delivers every project's alerts to
   Discord, with each project deciding when to send. Engram's episode alerts and
   vyoh.gg's wishlist price drops are the first two senders.
+- `status-page.md` — idea. status.vyoh.gg and an alert when a site on the
+  shared box stops answering, all of it running off the box it watches.
