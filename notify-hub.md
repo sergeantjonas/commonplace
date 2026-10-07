@@ -3,9 +3,17 @@
 **Status:** Idea — nothing built, nothing committed to. Two senders named.
 
 More than one project wants to tell the owner something the moment it happens:
-Engram, that an episode of a followed show was grabbed, imported, or is late;
+Engram, that a new episode of a followed show is ready, stuck, or late;
 vyoh.gg, that a game on the wishlist dropped in price. Each could post to a
 Discord webhook of its own. This note is the case for not doing that.
+
+## What earns an alert
+
+Only what happened without the owner. Anything the owner just did is already
+known to them, so adding a series, starting a search, buying a game or
+changing a setting never pings, and neither does what follows directly from
+it. A new episode landing, a download stalling, a price falling: those happen
+while nobody is looking, and they are the whole point.
 
 ## Deciding stays, delivering moves
 
@@ -24,7 +32,7 @@ A project posts one message per thing worth saying:
 ```json
 {
   "source": "engram",
-  "key": "imported:show:tvdb:392276:3:5",
+  "key": "ready:show:tvdb:392276:3:5",
   "title": "S03E05 is on disk",
   "body": "You're one behind.",
   "url": "https://engram.vyoh.gg/..."
@@ -70,9 +78,9 @@ A project posts one message per thing worth saying:
 
 ## Senders
 
-- **Engram — episode alerts for followed shows.** Grabbed, imported and
-  overdue; the gaps the overdue check has to close first are in Engram's
-  `docs/working-notes/integration-ideas.md`.
+- **Engram — episode alerts for followed shows.** Ready, stuck and overdue,
+  for recently aired episodes only; the gaps the overdue check has to close
+  first are in Engram's `docs/working-notes/integration-ideas.md`.
 - **vyoh.gg — wishlist price drops.** Not written up there yet. The price data
   it would read from is scoped in vyoh.gg's
   `docs/working-notes/steam/steam-library-economics.md`.
