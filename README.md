@@ -22,17 +22,19 @@ first commit that forgets it.
 
 - **vyoh.gg** — `~/dev/vyoh.gg`, notes in `docs/working-notes/`.
 - **Engram** — `~/dev/engram`, engram.vyoh.gg, notes in `docs/working-notes/`.
+- **notify.vyoh.gg** — `~/dev/notify.vyoh.gg`, the notify hub, notes in
+  `docs/working-notes/`.
 
-Both run on the shared netcup box. Its topology lives in the `shared-vps` skill
+All of them run on the shared netcup box. Its topology lives in the `shared-vps` skill
 and in vyoh.gg's `docs/working-notes/ops/` for now, though it belongs to neither.
 
 ## The notes
 
 Every note opens with a `**Status:**` line; trust it over this list.
 
-- `notify-hub.md` — idea. One place that delivers every project's alerts to
-  Discord, with each project deciding when to send. Engram's episode alerts and
-  vyoh.gg's wishlist price drops are the first two senders.
+- `notify-hub.md` — being built in `~/dev/notify.vyoh.gg`; here lives only
+  what earns an alert and the contract every sender posts to. Engram's episode
+  alerts are the first sender, vyoh.gg's wishlist price drops the second.
 - `status-page.md` — being built in `~/dev/status.vyoh.gg`; here lives only
   the cross-project constraint ("the box cannot watch itself") that the same
   problem imposes on anything else that reports on the box.

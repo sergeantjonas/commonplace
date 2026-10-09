@@ -1,6 +1,6 @@
 # Notify hub
 
-**Status:** Idea — nothing built, nothing committed to. Two senders named.
+**Status:** Being built in `~/dev/notify.vyoh.gg`, from 2026-10-09; the implementation plan lives in that repo's `docs/working-notes/notify-hub.md`. This note holds only the part that spans projects: what earns an alert, and the contract every sender posts to.
 
 More than one project wants to tell the owner something the moment it happens:
 Engram, that a new episode of a followed show is ready, stuck, or late;
@@ -49,39 +49,25 @@ A project posts one message per thing worth saying:
   guesses what counts as new.
 - **`url` opens where the alert can be acted on**, inside the project that sent
   it.
+- **Each source has its own secret**, so a leaked Engram secret cannot post as
+  vyoh.gg. Whether the secret also names the source, leaving `source` out of
+  the body, is settled in the hub's chunk 2.
+- **A sender keeps what it decided until the hub has taken it.** A scheduled
+  check re-sends on its next run and the key absorbs the repeat; a one-off
+  event, such as a Sonarr import, is lost unless its sender holds on to it.
+  Engram does, in its `alert` table.
 
-## Delivery
+## Where it runs
 
-- **Webhook URLs live in the hub and nowhere else.** A Discord webhook URL is a
-  credential — whoever holds it can post to the channel — so no project holds
-  one, and none reaches a log.
-- **Bursts collapse.** Messages from one source within a short window arrive as
-  one: a season pack is ten imports.
-- **Each source routes to its own channel**, so one project's alerts can be
-  muted without the other's.
-- **What was delivered is recorded**, so "did it tell me?" has an answer.
-
-## Open
-
-- **Build or adopt.** Apprise API delivers to Discord and a hundred other
-  targets but keeps no record, so it cannot refuse a repeat; at most it is the
-  sending step inside the hub. ntfy pushes to a phone app rather than to
-  Discord. A small service with one Postgres table is the likelier shape.
-- **Where it runs.** Its own tenant on the shared box, or a route inside an
-  existing app. A route inside Engram would tie vyoh.gg's alerts to Engram's
-  uptime. On the box, it cannot carry the alert that the box is down;
-  [status-page.md](status-page.md) sends that one another way.
-- **How senders authenticate.** One secret per source, so a leaked Engram
-  secret cannot post as vyoh.gg.
-- **When the hub is down.** A scheduled check re-sends on its next run and the
-  key absorbs the repeat. A one-off event, such as a Sonarr import, is lost
-  unless its sender retries.
+A tenant of the shared box at `notify.vyoh.gg`, so it cannot carry the alert
+that the box itself is down. [status-page.md](status-page.md) sends that one
+through healthchecks.io instead.
 
 ## Senders
 
-- **Engram — episode alerts for followed shows.** Ready, stuck and overdue,
-  for recently aired episodes only. Scoped as an arc in Engram's
-  `docs/working-notes/episode-alerts.md`.
+- **Engram — episode alerts for followed shows.** The first sender. Ready,
+  stuck and overdue, for recently aired episodes only. Scoped as an arc in
+  Engram's `docs/working-notes/episode-alerts.md`.
 - **vyoh.gg — wishlist price drops.** Not written up there yet. The price data
   it would read from is scoped in vyoh.gg's
   `docs/working-notes/steam/steam-library-economics.md`.
