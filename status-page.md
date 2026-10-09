@@ -4,10 +4,9 @@
 
 ## The box cannot watch itself
 
-Anything that reports on the box has to keep working while the box is down. Otherwise it goes quiet in exactly the case it exists for. For `status.vyoh.gg` that plays out three ways:
+Anything that reports on the box has to keep working while the box is down. Otherwise it goes quiet in exactly the case it exists for. For `status.vyoh.gg` that plays out two ways:
 
 - **The page is hosted off the box.** A status page served by the nginx it reports on shows nothing when that nginx is down. A static page on GitHub Pages under a `status.vyoh.gg` CNAME has no dependency on the box.
-- **Alerts come from healthchecks.io, not from the notify hub.** The hub is likely to run as a tenant on this box ([notify-hub.md](notify-hub.md) § Open), so an alert that the box is down, routed through it, would never arrive. healthchecks.io already emails about the backup checks and can post to Discord without the hub.
-- **Silence counts as a failure.** healthchecks.io alerts when a check stays quiet past its schedule plus grace. A prober that stopped running, or a box that took the prober down with it, therefore alerts the same way as a site that returned an error.
+- **The prober runs off the box too.** When the thing that decides whether an alert fires lives on the box, "box is down" never fires — the decider died with the box. Running the prober off-box (GitHub Actions, in this case) means failed probes still produce alerts when the box dies, because the alerter is still alive.
 
-The same constraint applies to anything else that reports on the box's health, including the notify hub itself: whichever thing tells you the box is down cannot live on the box.
+The same constraint applies to anything else that reports on the box's health, including the notify hub ([notify-hub.md](notify-hub.md)): whichever thing tells you the box is down cannot live on the box.
