@@ -75,8 +75,10 @@ the sender logs it and gives up on that one.
 ## Where it runs
 
 A tenant of the shared box at `notify.vyoh.gg`, so it cannot carry the alert
-that the box itself is down. [status-page.md](status-page.md) sends that one
-through healthchecks.io instead.
+that the box itself is down. [status-page.md](status-page.md) handles that one
+off-box: its prober runs in GitHub Actions, and a failed POST to the hub
+makes the workflow exit non-zero so GitHub's workflow-failure email arrives
+instead.
 
 ## Senders
 
