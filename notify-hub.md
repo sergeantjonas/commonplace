@@ -83,8 +83,8 @@ instead.
 ## Senders
 
 - **Engram — episode alerts for followed shows.** The first sender, live
-  2026-10-10. Ready, stuck and overdue, for recently aired episodes only;
-  ready is the one built so far. Scoped as an arc in
+  2026-10-10. Ready, stuck and overdue, for recently aired episodes only, all
+  three deployed that day. Scoped as an arc in
   Engram's `docs/working-notes/episode-alerts.md`.
 - **vyoh.gg — wishlist price drops.** Not written up there yet. The price data
   it would read from is scoped in vyoh.gg's
