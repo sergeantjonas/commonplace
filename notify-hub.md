@@ -27,17 +27,33 @@ should arrive as one. The hub solves those once.
 
 ## The contract
 
-A project posts one message per thing worth saying:
+A project posts one message per thing worth saying, to `POST /messages` with
+`authorization: Bearer <its secret>`:
 
 ```json
 {
-  "source": "engram",
-  "key": "ready:show:tvdb:392276:3:5",
+  "key": "ready@show:tvdb:392276/s03e0005",
   "title": "S03E05 is on disk",
   "body": "You're one behind.",
   "url": "https://engram.vyoh.gg/..."
 }
 ```
+
+`key` and `title` are required; `body` and `url` are not, and no other field
+is taken:
+
+| Field | Limit |
+|---|---|
+| `key` | at most 200 characters, no whitespace |
+| `title` | at most 256 characters |
+| `body` | at most 2000 characters |
+| `url` | `http` or `https`, at most 2048 characters |
+
+The hub answers `202 { "duplicate": false }` for something new and
+`202 { "duplicate": true }` for a key it already has. A 401 or a 5xx means it
+does not have the message, and the sender keeps it and tries again. A 400 means
+the message itself is wrong and will be refused however often it is sent, so
+the sender logs it and gives up on that one.
 
 - **`(source, key)` is delivered once.** Posting it again is a no-op, so a
   sender can retry freely. That matters most for checks that run on a schedule:
@@ -49,9 +65,8 @@ A project posts one message per thing worth saying:
   guesses what counts as new.
 - **`url` opens where the alert can be acted on**, inside the project that sent
   it.
-- **Each source has its own secret**, so a leaked Engram secret cannot post as
-  vyoh.gg. Whether the secret also names the source, leaving `source` out of
-  the body, is settled in the hub's chunk 2.
+- **Each source has its own secret, and the secret names the source.** The
+  body carries no `source`, so a leaked Engram secret cannot post as vyoh.gg.
 - **A sender keeps what it decided until the hub has taken it.** A scheduled
   check re-sends on its next run and the key absorbs the repeat; a one-off
   event, such as a Sonarr import, is lost unless its sender holds on to it.
