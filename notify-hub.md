@@ -1,6 +1,6 @@
 # Notify hub
 
-**Status:** Being built in [`~/dev/notify.vyoh.gg`](https://github.com/sergeantjonas/notify.vyoh.gg), from 2026-10-09; the implementation plan lives in that repo's `docs/working-notes/notify-hub.md`. This note holds only the part that spans projects: what earns an alert, and the contract every sender posts to.
+**Status:** Live at `notify.vyoh.gg` since 2026-10-10, with Engram sending; built in [`~/dev/notify.vyoh.gg`](https://github.com/sergeantjonas/notify.vyoh.gg), whose `docs/working-notes/notify-hub.md` holds the implementation plan. This note holds only the part that spans projects: what earns an alert, and the contract every sender posts to.
 
 More than one project wants to tell the owner something the moment it happens:
 Engram, that a new episode of a followed show is ready, stuck, or late;
@@ -80,8 +80,9 @@ through healthchecks.io instead.
 
 ## Senders
 
-- **Engram — episode alerts for followed shows.** The first sender. Ready,
-  stuck and overdue, for recently aired episodes only. Scoped as an arc in
+- **Engram — episode alerts for followed shows.** The first sender, live
+  2026-10-10. Ready, stuck and overdue, for recently aired episodes only;
+  ready is the one built so far. Scoped as an arc in
   Engram's `docs/working-notes/episode-alerts.md`.
 - **vyoh.gg — wishlist price drops.** Not written up there yet. The price data
   it would read from is scoped in vyoh.gg's
