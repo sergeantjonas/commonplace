@@ -1,6 +1,6 @@
 # Notify hub
 
-**Status:** Being built in `~/dev/notify.vyoh.gg`, from 2026-10-09; the implementation plan lives in that repo's `docs/working-notes/notify-hub.md`. This note holds only the part that spans projects: what earns an alert, and the contract every sender posts to.
+**Status:** Being built in [`~/dev/notify.vyoh.gg`](https://github.com/sergeantjonas/notify.vyoh.gg), from 2026-10-09; the implementation plan lives in that repo's `docs/working-notes/notify-hub.md`. This note holds only the part that spans projects: what earns an alert, and the contract every sender posts to.
 
 More than one project wants to tell the owner something the moment it happens:
 Engram, that a new episode of a followed show is ready, stuck, or late;
